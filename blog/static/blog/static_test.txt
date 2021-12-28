@@ -1,0 +1,4 @@
+this a txt file
+run the following command for addaing sttic file in django 
+{% load static %}
+in href="{% static 'path/filename.ext' %}"

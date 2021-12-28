@@ -1,0 +1,142 @@
+{% extends "shop/basic.html" %}
+
+{% block title %} Home Page {% endblock %}
+{% block extra_head %}
+    <style>
+      .col-md-3{
+        display: inline-block;
+        width: 22.5%;
+        text-align: center;
+
+      }
+
+      .carousel-indicators .active{
+        background-color: coral;
+      }
+
+      .col-md-3 img{
+        width: 100%;
+        height: 20em;
+      }
+      body .carousel-indicator li{
+        background-color: aqua;
+      }
+
+      body .carousel-indicator{
+        bottom: 0;
+      }
+
+      body .carousel-control-prev-icon,
+      body .carousel-control-next-icon{
+        background-color: cadetblue;
+      }
+
+      .carousel-control-prev,
+          .carousel-control-next{
+          top: auto;
+          bottom: auto;
+          }
+      body .no-padding{
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+
+    </style>
+{% endblock %}
+
+{% block body %}
+{% load static %}
+    <div class="container">
+      {% for items,values in products.items %}
+        <h1>{{ items }}</h1>
+      
+    <div id="demo{{forloop.counter}}" class="carousel slide my-3" data-bs-ride = "carousel">
+      <ul class="carousel-indicators">
+        <li data-bs-target="#demo" data-bs-slide-to = "0" class="active"></li>
+        {% for i in values.1 %}
+        <li data-bs-target="#demo{{forloop.parentloop.counter}}" data-bs-slide-to = "{{i}}"></li>
+        {% endfor %}
+
+      </ul>
+
+    <!-- Slide show starts here -->
+
+    <div class="container carousel-inner no-padding">
+      
+      <div class="carousel-item active">
+        <!-- <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='/media/{{ values.0.0.product_image }}' class="card-img-top" alt='{% static "shop/cart_logo.png" %}'>
+            <div class="card-body">
+              <h5 class="card-title">{{ values.0.0.product_name }}</h5>
+              <p class="card-text">{{ values.0.0.product_desription }} <br> Best buy @ <strong> {{values.0.0.product_price}} </strong></p>
+              <button id="pr{{values.0.0.product_id}}" class="btn btn-primary cart">Add to Cart</button>
+            </div>
+          </div>
+        </div> -->
+
+        {% for i in values.0 %}
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='/media/{{ i.product_image }}' class="card-img-top" alt='{% static "shop/cart_logo.png" %}'>
+            <div class="card-body">
+              <h5 class="card-title">{{ i.product_name }}</h5>
+              <p class="card-text">{{ i.product_desription }} <br> Best buy @ <strong> {{i.product_price}} </strong></p>
+              <button id="pr{{i.product_id}}" class="btn btn-primary cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+
+        </div><div class="carousel-item">
+
+        {% endif %}
+
+        {% endfor %}
+
+        </div>
+    </div>      
+  </div>
+    <!-- left right controls for slide -->
+    <a href="#demo{{forloop.counter}}" class="carousel-control-prev" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a href="#demo{{forloop.counter}}" class="carousel-control-next" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+
+    
+  {% endfor %}
+    
+
+    {% endblock %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>  
+{% block js %}
+
+    <!-- logic of cart creation -->
+ 
+    <script>
+       if(localStorage.getItem('cart') == null){
+          var cart = {}
+       }
+       else{
+         cart = JSON.parse(localStorage.getItem('cart'));
+       }
+      
+       $('.cart').click(function(){
+        var id_str = this.id.toString();
+        if(cart[id_str] != undefined){
+          cart[id_str] = cart[id_str] + 1;
+        }
+        else{
+          cart[id_str] = 1;
+        }
+        localStorage.setItem('cart',JSON.stringify(cart));
+       });
+      
+
+    </script>
+
+{% endblock %}

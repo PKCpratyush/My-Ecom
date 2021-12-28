@@ -1,0 +1,52 @@
+{% extends 'shop/basic.html' %}
+{% block title %} Login Page {% endblock %}
+
+{% block body %} 
+
+{% if check_empty_field %}
+    <div class="alert alert-danger" role="alert">
+    {{ message }}
+    </div>
+{% endif %}
+
+<div style="margin-top: 10%; text-align: center;">
+    <form action="/shop/sign_up/" method="POST">{% csrf_token %}
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">User_name</span>
+            <input name="user_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+            <input name="user_password" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">First Name</span>
+            <input name="user_first_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Last Name</span>
+            <input name="user_last_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Gender</span>
+            <input name="user_gender" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">AAdhar UID</span>
+            <input name="user_aadhar" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Date Joined</span>
+            <input name="user_date_joined" type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <!-- <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+            <input name="user_password" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> -->
+        </div>
+        <button class="btn btn-primary btn-lg " role="button" aria-disabled="true">Log In</button>
+        <!-- <a href="{% url 'sign_Up' %}" class="btn btn-primary btn-lg  btn-info" role="button" aria-disabled="true">Sign Up</a> -->
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'shop/basic.html' %}
+{% block title %} Login Page {% endblock %}
+
+{% block body %} 
+
+{% if check_empty_field %}
+    <div class="alert alert-danger" role="alert">
+    {{ message }}
+    </div>
+{% endif %}
+
+<div style="margin-top: 20%; text-align: center;">
+    <form action="/shop/login_page/" method="POST">{% csrf_token %}
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">User_name</span>
+            <input name="user_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+            <input name="user_password" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <button class="btn btn-primary btn-lg " role="button" aria-disabled="true">Log In</button>
+        <a href="{% url 'sign_Up' %}" class="btn btn-primary btn-lg  btn-info" role="button" aria-disabled="true">Sign Up</a>
+
+    </form>
+</div>
+
+{% endblock %}
