@@ -1,7 +1,8 @@
-from datetime import datetime, time
+from django.utils.timezone import now
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 import uuid
+# from django.contrib.postgres.fields import BigIntegerRangeField
 
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -11,9 +12,9 @@ from django.contrib.auth.models import PermissionsMixin
 # register your table in admin.py for using admin features
 
 # db index
-# date time field
-# choices field
-# text field
+# date time field |/
+# choices field |/
+# text field |/
 
 # class name should be uppercase
 
@@ -34,17 +35,17 @@ class Product(models.Model):
 
 class Ecom_user_profile(models.Model):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    phone_number = models.IntegerField(default=0)
+    phone_number = models.CharField(max_length=16)
     country_code = models.IntegerField(default=0)
     email = models.EmailField(default="")
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     avatar = models.ImageField(upload_to = "shop/user_images", default = "")
     gender = models.CharField(max_length=10)
-    aadhar_uid = models.IntegerField()
+    aadhar_uid = models.CharField(max_length=16)
     verification_status = models.CharField(max_length= 20, default="unverified")
-    date_joined = models.DateTimeField()
-    date_verified = models.DateTimeField(default=datetime.now())
+    date_joined = models.DateTimeField(default=now())
+    date_verified = models.DateTimeField(default=now())
 
 class Ecom_user(models.Model):
     user_details = models.ForeignKey(Ecom_user_profile, on_delete=models.CASCADE)

@@ -29,7 +29,8 @@
         </div>
         <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
             <span class="input-group-text" id="inputGroup-sizing-default">Gender</span>
-            <input name="user_gender" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <!-- <input name="user_gender" type="selec" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> -->
+            <select name="user_gender" id="" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"><option value="male">Male</option><option value="female">Female</option><option value="others">Others</option></select>
         </div>
         <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
             <span class="input-group-text" id="inputGroup-sizing-default">AAdhar UID</span>
@@ -39,11 +40,19 @@
             <span class="input-group-text" id="inputGroup-sizing-default">Date Joined</span>
             <input name="user_date_joined" type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
         </div>
-        <!-- <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
-            <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
-            <input name="user_password" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"> -->
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+            <input name="user_email" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
         </div>
-        <button class="btn btn-primary btn-lg " role="button" aria-disabled="true">Log In</button>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Phone Number</span>
+            <input name="user_phone" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3" style="width: 20%; margin-left: 40%;">
+            <span class="input-group-text" id="inputGroup-sizing-default">Country Code</span>
+            <input name="user_country_code" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <button class="btn btn-primary btn-lg " role="button" aria-disabled="true" style="margin-left: 1%;">Sign Up</button>
         <!-- <a href="{% url 'sign_Up' %}" class="btn btn-primary btn-lg  btn-info" role="button" aria-disabled="true">Sign Up</a> -->
 
     </form>

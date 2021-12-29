@@ -56,18 +56,27 @@ def login(request):
 def signup(request):
     a = 0
     user_name = request.POST.get("user_name","")
-    if user_name == "":
-        return render(request, "shop/signup.html")
     user_password = request.POST.get("user_password","")
+
+
+    if user_name == "" or user_password == "":
+        return render(request, "shop/signup.html", {"check_empty_field":False})
+    elif user_name != "" and Ecom_user.objects.filter(user_name=user_name).exists():
+        return render(request,"shop/signup.html", {"check_empty_field":True,"message":"User name already exist"})
+
+
     user_first_name = request.POST.get("user_first_name","")
     user_last_name = request.POST.get("user_last_name","")
-    user_gender = request.POST.get("user_gender","")
-    user_aadhar = request.POST.get("user_aadhar", 99)
+    user_gender = request.POST.get("user_gender","male")
+    user_aadhar = request.POST.get("user_aadhar", "")
     user_date_joined = request.POST.get("user_date_joined", datetime.now())
-    user = Ecom_user_profile(first_name = user_first_name, last_name = user_last_name, gender = user_gender,aadhar_uid =int(user_aadhar),date_joined = user_date_joined)
+    user_phone = request.POST.get("user_phone", "")
+    user_country_code = request.POST.get("user_country_code", 91)
+    user_email = request.POST.get("user_email","")
+    user = Ecom_user_profile(email = user_email, phone_number = user_phone, country_code = user_country_code, first_name = user_first_name, last_name = user_last_name, gender = user_gender,aadhar_uid =user_aadhar,date_joined = user_date_joined)
     user.save()
 
-    user_profile = Ecom_user(user_password=user_password, user_name=user_name)
+    user_profile = Ecom_user(user_details = user,user_password=user_password, user_name=user_name)
     user_profile.save()
     
     return render(request, "shop/index.html")
